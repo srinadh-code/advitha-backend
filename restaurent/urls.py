@@ -26,6 +26,7 @@ urlpatterns = [
     path("api/gallery/",include("gallery.urls")),
     path("rooms/", include("room_management.urls")),
     path("bookings/",include("bookings.urls")),
+    path("api/contact/", include("contact.urls")),
 
     
 ]

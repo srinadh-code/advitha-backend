@@ -69,7 +69,8 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     'gallery',
     'room_management',
-    'bookings'
+    'bookings',
+    'contact',
   
 ]
 

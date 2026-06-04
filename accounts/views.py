@@ -80,6 +80,26 @@ class CreateReceptionistAPIView(APIView):
 
     permission_classes = [IsAuthenticated]
 
+    def get(self, request):
+
+        if request.user.role != "admin":
+            return Response(
+                {"error": "Only admin can view receptionists"},
+                status=403
+            )
+
+        receptionists = User.objects.filter(
+            role="receptionist"
+        ).values(
+            "id",
+            "first_name",
+            "last_name",
+            "email",
+            "phone_number"
+        )
+
+        return Response(receptionists)
+
     def post(self, request):
 
         if request.user.role != "admin":
@@ -102,8 +122,31 @@ class CreateReceptionistAPIView(APIView):
             {"message": "Receptionist created successfully"},
             status=201
         )
-        
-        
+
+    def delete(self, request, receptionist_id):
+
+        if request.user.role != "admin":
+            return Response(
+                {"error": "Only admin can delete receptionists"},
+                status=403
+            )
+
+        try:
+            receptionist = User.objects.get(
+                id=receptionist_id,
+                role="receptionist"
+            )
+        except User.DoesNotExist:
+            return Response(
+                {"error": "Receptionist not found"},
+                status=404
+            )
+
+        receptionist.delete()
+
+        return Response(
+            {"message": "Receptionist deleted successfully"}
+        )
 
 
 from rest_framework.views import APIView
