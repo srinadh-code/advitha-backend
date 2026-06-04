@@ -68,6 +68,9 @@ INSTALLED_APPS = [
     "cloudinary",
     "cloudinary_storage",
     'gallery',
+    'room_management',
+    'bookings'
+  
 ]
 
 MIDDLEWARE = [

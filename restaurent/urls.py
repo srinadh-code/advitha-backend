@@ -23,10 +23,11 @@ urlpatterns = [
     path('',include("accounts.urls")),
     path("api/",include("food_iteams.urls")),
     path("api/tourism/",include("tourism.urls")),
-    path(
-    "api/gallery/",
-    include("gallery.urls")
-),
+    path("api/gallery/",include("gallery.urls")),
+    path("rooms/", include("room_management.urls")),
+    path("bookings/",include("bookings.urls")),
+
+    
 ]
 urlpatterns += static(
     settings.MEDIA_URL,
