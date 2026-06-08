@@ -71,11 +71,18 @@ INSTALLED_APPS = [
     'room_management',
     'bookings',
     'contact',
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    'allauth.socialaccount.providers.google',
+    
   
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
     'django.middleware.security.SecurityMiddleware',
     
     
@@ -87,7 +94,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+SITE_ID = 1
 
+# settings.py
 
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -194,4 +207,14 @@ BREVO_API_KEY = config("BREVO_API_KEY")
 FROM_EMAIL = config("FROM_EMAIL")
 
 
-
+GOOGLE_CLIENT_ID = config("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = config("GOOGLE_CLIENT_SECRET")
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "app": {
+            "client_id": config("GOOGLE_CLIENT_ID"),
+            "secret": config("GOOGLE_CLIENT_SECRET"),
+            "key": "",
+        }
+    }
+}

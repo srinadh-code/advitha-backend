@@ -14,6 +14,7 @@ class User(AbstractUser):
         ("admin", "Admin"),
         ("receptionist", "Receptionist"),
         ("customer", "Customer"),
+        ("staff","Staff"),
     )
 
     email = models.EmailField(
@@ -30,6 +31,12 @@ class User(AbstractUser):
         max_length=15,
         blank=True
     )
+    google_id = models.CharField(
+    max_length=255,
+    blank=True,
+    null=True,
+    unique=True
+)
 
     def save(self, *args, **kwargs):
         if self.is_superuser:

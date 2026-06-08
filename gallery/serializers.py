@@ -4,13 +4,21 @@ from .models import GalleryImage
 
 class GalleryImageSerializer(serializers.ModelSerializer):
 
-    image = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = GalleryImage
-        fields = "__all__"
+        fields = [
+            "id",
+            "title",
+            "category",
+            "image",
+            "image_url",
+            "created_at",
+        ]
 
-    def get_image(self, obj):
+    def get_image_url(self, obj):
+
         if obj.image:
             return obj.image.url
 

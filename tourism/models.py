@@ -1,3 +1,7 @@
+
+
+
+
 from django.db import models
 
 
@@ -22,14 +26,36 @@ class TourismPlace(models.Model):
     description = models.TextField()
 
     image = models.ImageField(
-    upload_to="tourism/"
-)
+        upload_to="tourism/"
+    )
+    latitude = models.FloatField(
+        null=True,
+        blank=True
+    )
 
+    longitude = models.FloatField(
+        null=True,
+        blank=True
+    )
     distance = models.CharField(max_length=50)
 
     hours = models.CharField(max_length=100)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
         return self.name
+    
+
+
+
+class HotelLocation(models.Model):
+    hotel_name = models.CharField(max_length=200)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    address = models.TextField()
+
+    def __str__(self):
+        return self.hotel_name

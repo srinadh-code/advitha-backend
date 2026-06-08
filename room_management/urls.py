@@ -1,10 +1,14 @@
 from django.urls import path
-from .views import RoomListAPIView
+from .views import RoomAPIView
 
 urlpatterns = [
     path(
-        '',
-        RoomListAPIView.as_view(),
-        name='room-list'
+        "",
+        RoomAPIView.as_view()
+    ),
+
+    path(
+        "<int:pk>/",
+        RoomAPIView.as_view()
     ),
 ]

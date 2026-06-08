@@ -1,20 +1,39 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 
-from .models import TourismPlace
+
+
+from rest_framework import generics
+from rest_framework.views import APIView
+from .models import TourismPlace,HotelLocation
 from .serializers import TourismPlaceSerializer
 
 
-class TourismPlaceListAPIView(APIView):
+class TourismPlaceListCreateAPIView(
+    generics.ListCreateAPIView
+):
+    queryset = TourismPlace.objects.all()
+    serializer_class = TourismPlaceSerializer
 
+    def get_serializer_context(self):
+        return {
+            "request": self.request
+        }
+
+
+class TourismPlaceDetailAPIView(
+    generics.RetrieveUpdateDestroyAPIView
+):
+    queryset = TourismPlace.objects.all()
+    serializer_class = TourismPlaceSerializer
+
+    def get_serializer_context(self):
+        return {
+            "request": self.request
+        }
+        
+
+
+class HotelLocationView(APIView):
     def get(self, request):
-
-        places = TourismPlace.objects.all()
-
-        serializer = TourismPlaceSerializer(
-            places,
-            many=True,
-            context={"request": request}
-        )
-
+        location = HotelLocation.objects.first()
+        serializer = HotelLocationSerializer(location)
         return Response(serializer.data)

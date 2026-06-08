@@ -108,3 +108,40 @@ class ReceptionistCreateSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+    
+    
+    
+    
+class StaffCreateSerializer(serializers.ModelSerializer):
+
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "phone_number",
+            "salary",
+            "password"
+        ]
+
+    def create(self, validated_data):
+
+        password = validated_data.pop("password")
+
+        user = User(
+        username=validated_data["email"],
+        email=validated_data["email"],
+        role="staff",
+        first_name=validated_data["first_name"],
+        last_name=validated_data.get("last_name", ""),
+        phone_number=validated_data["phone_number"],
+        salary=validated_data["salary"],
+    )
+
+        user.set_password(password)
+        user.save()
+
+        return user
