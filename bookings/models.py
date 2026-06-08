@@ -19,6 +19,16 @@ class Booking(models.Model):
     check_out = models.DateField()
 
     guests = models.IntegerField()
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ("booked", "Booked"),
+            ("checked_in", "Checked In"),
+            ("checked_out", "Checked Out"),
+            ("cancelled", "Cancelled"),
+        ],
+        default="booked"
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True
