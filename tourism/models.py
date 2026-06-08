@@ -12,8 +12,8 @@ class TourismPlace(models.Model):
         ("Waterfalls", "Waterfalls"),
         ("Historical Places", "Historical Places"),
         ("Parks", "Parks"),
-        ("Adventure Spots", "Adventure Spots"),
-        ("View Points", "View Points"),
+        # ("Adventure Spots", "Adventure Spots"),
+        # ("View Points", "View Points"),
     ]
 
     name = models.CharField(max_length=200)
