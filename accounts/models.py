@@ -31,6 +31,12 @@ class User(AbstractUser):
         max_length=15,
         blank=True
     )
+    salary = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
     google_id = models.CharField(
     max_length=255,
     blank=True,

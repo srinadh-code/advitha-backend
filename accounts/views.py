@@ -95,7 +95,8 @@ class CreateReceptionistAPIView(APIView):
             "first_name",
             "last_name",
             "email",
-            "phone_number"
+            "phone_number",
+            "salary"
         )
 
         return Response(receptionists)
