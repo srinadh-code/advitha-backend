@@ -149,3 +149,110 @@ class CancelBookingAPIView(APIView):
             {"message": "Booking cancelled successfully"},
             status=status.HTTP_200_OK
         )
+        
+        
+        
+from datetime import date
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from .models import Booking
+from .serializers import BookingSerializer
+
+
+class TodayCheckInAPIView(APIView):
+
+    def get(self, request):
+
+        today = date.today()
+
+        bookings = Booking.objects.filter(
+            check_in=today,
+            status="booked"
+        )
+
+        serializer = BookingSerializer(
+            bookings,
+            many=True
+        )
+
+        return Response(serializer.data)
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+from .models import Booking
+
+
+class CheckInBookingAPIView(APIView):
+
+    def put(self, request, pk):
+
+        try:
+            booking = Booking.objects.get(pk=pk)
+
+        except Booking.DoesNotExist:
+
+            return Response(
+                {"message": "Booking not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        booking.status = "checked_in"
+        booking.save()
+
+        return Response({
+            "message": "Guest checked in successfully"
+        })    
+from datetime import date
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from .models import Booking
+from .serializers import BookingSerializer
+
+
+class TodayCheckOutAPIView(APIView):
+
+    def get(self, request):
+
+        today = date.today()
+
+        bookings = Booking.objects.filter(
+            check_out=today,
+            status="checked_in"
+        )
+
+        serializer = BookingSerializer(
+            bookings,
+            many=True
+        )
+
+        return Response(serializer.data)
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+from .models import Booking
+
+
+class CheckOutBookingAPIView(APIView):
+
+    def put(self, request, pk):
+
+        try:
+            booking = Booking.objects.get(pk=pk)
+
+        except Booking.DoesNotExist:
+            return Response(
+                {"message": "Booking not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        booking.status = "checked_out"
+        booking.save()
+
+        return Response({
+            "message": "Guest checked out successfully"
+        })

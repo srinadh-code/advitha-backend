@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'room_management',
     'bookings',
     'contact',
+    "events",
     "django.contrib.sites",
     "allauth",
     "allauth.account",

@@ -1,5 +1,10 @@
+
+
 # from django.urls import path
-# from .views import BookingAPIView
+# from .views import (
+#     BookingAPIView,
+#     CancelBookingAPIView
+# )
 
 # urlpatterns = [
 #     path(
@@ -7,13 +12,21 @@
 #         BookingAPIView.as_view(),
 #         name="bookings"
 #     ),
+
+#     path(
+#         "cancel/<int:pk>/",
+#         CancelBookingAPIView.as_view(),
+#         name="cancel-booking"
+#     ),
 # ]
+
+
 
 
 from django.urls import path
 from .views import (
     BookingAPIView,
-    CancelBookingAPIView
+    CancelBookingAPIView,TodayCheckInAPIView,CheckInBookingAPIView,TodayCheckOutAPIView,CheckOutBookingAPIView
 )
 
 urlpatterns = [
@@ -28,4 +41,26 @@ urlpatterns = [
         CancelBookingAPIView.as_view(),
         name="cancel-booking"
     ),
+    path(
+           "check-in/",
+        TodayCheckInAPIView.as_view(),
+        name="today-checkin"
+    ),
+    path(
+    "check-in/<int:pk>/",
+    CheckInBookingAPIView.as_view(),
+    name="check-in-booking"
+),
+path(
+    "check-out/",
+    TodayCheckOutAPIView.as_view(),
+    name="today-checkout"
+),
+
+path(
+    "check-out/<int:pk>/",
+    CheckOutBookingAPIView.as_view(),
+    name="checkout-booking"
+)
+    
 ]

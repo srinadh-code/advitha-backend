@@ -1,18 +1,12 @@
 from rest_framework import serializers
 from .models import  Booking
 
-# class BookingSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = Booking
-#         fields = "__all__"
-
 
 
 class BookingSerializer(serializers.ModelSerializer):
 
     room_name = serializers.CharField(
-        source="room.name",
+        source="room.title",
         read_only=True
     )
 

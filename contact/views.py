@@ -1,3 +1,4 @@
+
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,6 +13,7 @@ from sib_api_v3_sdk.rest import ApiException
 
 class ContactUsView(APIView):
 
+    
     def send_brevo_email(self, contact):
 
         configuration = sib_api_v3_sdk.Configuration()
@@ -76,29 +78,94 @@ class ContactUsView(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
     
+
+
+
+
+
+
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from accounts.models import User
+
+from .models import ContactMessage
+from .serializers import ContactMessageSerializer
 
 
 class ReceptionistContactAPIView(APIView):
 
-    permission_classes = []
-
     def get(self, request):
 
-        receptionist = User.objects.filter(
-            role="receptionist"
-        ).first()
+        enquiries = ContactMessage.objects.all().order_by(
+            "-created_at"
+        )
 
-        if not receptionist:
+        serializer = ContactMessageSerializer(
+            enquiries,
+            many=True
+        )
+
+        return Response(serializer.data)
+    
+class ReplyContactAPIView(APIView):
+
+    def post(self, request, enquiry_id):
+
+        try:
+            enquiry = ContactMessage.objects.get(id=enquiry_id)
+        except ContactMessage.DoesNotExist:
             return Response(
-                {"error": "No receptionist found"},
+                {"error": "Enquiry not found"},
                 status=404
             )
 
-        return Response({
-            "name": f"{receptionist.first_name} {receptionist.last_name}",
-            "phone_number": receptionist.phone_number,
-            "email": receptionist.email,
-        })
+        subject = request.data.get("subject")
+        message = request.data.get("message")
+
+        configuration = sib_api_v3_sdk.Configuration()
+        configuration.api_key["api-key"] = settings.BREVO_API_KEY
+
+        api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+            sib_api_v3_sdk.ApiClient(configuration)
+        )
+
+        email = sib_api_v3_sdk.SendSmtpEmail(
+            sender={
+                "email": settings.FROM_EMAIL,
+                "name": "Mulugu Hotel"
+            },
+            to=[
+                {
+                    "email": enquiry.email,
+                    "name": enquiry.name
+                }
+            ],
+            subject=subject,
+            html_content=f"""
+            <p>Dear {enquiry.name},</p>
+
+            <p>{message}</p>
+
+            <br>
+
+            <p>Regards,</p>
+            <p>Mulugu Hotel Team</p>
+            """
+        )
+
+        try:
+            api_instance.send_transac_email(email)
+
+            enquiry.status = "replied"
+            enquiry.save()
+
+            return Response({
+                "success": True,
+                "message": "Reply sent successfully"
+            })
+
+        except ApiException as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
