@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'bookings',
     'contact',
     "events",
+    'display_dashboard',
     "django.contrib.sites",
     "allauth",
     "allauth.account",

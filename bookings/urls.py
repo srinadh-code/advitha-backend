@@ -26,7 +26,7 @@
 from django.urls import path
 from .views import (
     BookingAPIView,
-    CancelBookingAPIView,TodayCheckInAPIView,CheckInBookingAPIView,TodayCheckOutAPIView,CheckOutBookingAPIView
+    CancelBookingAPIView,TodayCheckInAPIView,CheckInBookingAPIView,TodayCheckOutAPIView,CheckOutBookingAPIView,CheckInAPIView,CheckOutAPIView
 )
 
 urlpatterns = [
@@ -61,6 +61,20 @@ path(
     "check-out/<int:pk>/",
     CheckOutBookingAPIView.as_view(),
     name="checkout-booking"
-)
+),
+    path(
+        "",
+        BookingAPIView.as_view(),
+        name="bookings"
+    ),
+
+    path(
+        "cancel/<int:pk>/",
+        CancelBookingAPIView.as_view(),
+        name="cancel-booking"
+    ),
+    path("checkin/<int:pk>/", CheckInAPIView.as_view()),
+    path("checkout/<int:pk>/", CheckOutAPIView.as_view()),
+
     
 ]

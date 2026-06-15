@@ -1,5 +1,5 @@
 from django.db import models
-# from rooms.models import Room
+
 
 class Booking(models.Model):
 
@@ -33,6 +33,5 @@ class Booking(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True
     )
-
     def __str__(self):
         return self.full_name
