@@ -10,6 +10,24 @@ from rest_framework.permissions import IsAuthenticated
 
 from .serializers import UserSerializer
 
+from .models import User, PasswordResetOTP
+from .password_reset_serializers import VerifyOTPSerializer, ResetPasswordSerializer
+
+
+
+from .password_reset_serializers import (
+    ForgotPasswordSerializer
+)
+from .email_utils import (
+    generate_otp,
+    send_otp_email
+)
+
+from .models import User
+from .models import PasswordResetOTP
+
+
+
 class SignupAPIView(APIView):
 
     def post(self, request):
@@ -251,18 +269,7 @@ class CreateStaffAPIView(APIView):
 
 
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 
-from .models import User, PasswordResetOTP
-from .password_reset_serializers import (
-    ForgotPasswordSerializer
-)
-from .email_utils import (
-    generate_otp,
-    send_otp_email
-)
 
 
 class ForgotPasswordAPIView(APIView):
@@ -316,11 +323,7 @@ class ForgotPasswordAPIView(APIView):
             },
             status=status.HTTP_200_OK
         )
-from .models import User, PasswordResetOTP
-from .password_reset_serializers import VerifyOTPSerializer, ResetPasswordSerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+
 
 
 class VerifyOTPAPIView(APIView):
@@ -371,13 +374,7 @@ class VerifyOTPAPIView(APIView):
             },
             status=status.HTTP_200_OK
         )
-        
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 
-from .models import User
-from .models import PasswordResetOTP
 
 
 class ResetPasswordAPIView(APIView):
@@ -437,16 +434,12 @@ class ResetPasswordAPIView(APIView):
             status=status.HTTP_200_OK
         )
         
-        
+#for googlr auth 
+
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
 from django.conf import settings
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import User

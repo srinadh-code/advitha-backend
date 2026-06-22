@@ -9,6 +9,8 @@ from .models import GalleryImage
 from .serializers import GalleryImageSerializer
 
 
+
+
 class GalleryListAPIView(APIView):
 
     def get(self, request):
@@ -44,12 +46,7 @@ class GalleryCreateAPIView(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 
-from .models import GalleryImage
-from .serializers import GalleryImageSerializer
 
 
 class GalleryDetailAPIView(APIView):

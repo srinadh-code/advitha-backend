@@ -5,7 +5,9 @@ from .models import EventCategory
 from .serializers import (
     EventCategorySerializer
 )
-
+from .models import EventBooking
+from .serializers import EventBookingSerializer
+from rest_framework import status
 
 class EventCategoryAPIView(APIView):
 
@@ -22,12 +24,8 @@ class EventCategoryAPIView(APIView):
 
         return Response(serializer.data)
     
-    
-# events/views.py
 
-from .models import EventBooking
-from .serializers import EventBookingSerializer
-from rest_framework import status
+
 
 class EventBookingAPIView(APIView):
 

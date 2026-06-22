@@ -4,8 +4,8 @@
 from rest_framework import generics
 from rest_framework.views import APIView
 from .models import TourismPlace,HotelLocation
-from .serializers import TourismPlaceSerializer
-
+from .serializers import TourismPlaceSerializer,HotelLocationSerializer
+from rest_framework.response import Response
 
 class TourismPlaceListCreateAPIView(
     generics.ListCreateAPIView
