@@ -1,7 +1,7 @@
 
     
 from django.db import models
-
+from cloudinary.models import CloudinaryField
 class Room(models.Model):
 
     ROOM_TYPES = [
@@ -17,8 +17,11 @@ class Room(models.Model):
     available_rooms = models.IntegerField(default=1)
     room_type = models.CharField(max_length=20, choices=ROOM_TYPES)
 
-    image = models.ImageField(upload_to='rooms/')
-
+    image = CloudinaryField(
+    "image",
+    blank=True,
+    null=True
+)
     description = models.TextField()
 
     price = models.DecimalField(

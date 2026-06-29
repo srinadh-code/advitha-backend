@@ -4,7 +4,7 @@
 
 from django.db import models
 
-
+from cloudinary.models import CloudinaryField
 class TourismPlace(models.Model):
 
     CATEGORY_CHOICES = [
@@ -25,9 +25,11 @@ class TourismPlace(models.Model):
 
     description = models.TextField()
 
-    image = models.ImageField(
-        upload_to="tourism/"
-    )
+    image = CloudinaryField(
+    "image",
+    blank=True,
+    null=True
+)
     latitude = models.FloatField(
         null=True,
         blank=True

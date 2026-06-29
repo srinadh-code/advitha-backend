@@ -13,7 +13,8 @@ from .serializers import UserSerializer
 from .models import User, PasswordResetOTP
 from .password_reset_serializers import VerifyOTPSerializer, ResetPasswordSerializer
 
-
+from rest_framework.permissions import IsAuthenticated
+from.serializers import ReceptionistCreateSerializer
 
 from .password_reset_serializers import (
     ForgotPasswordSerializer
@@ -92,8 +93,7 @@ class MeAPIView(APIView):
             serializer.data
         )
         
-from rest_framework.permissions import IsAuthenticated
-from.serializers import ReceptionistCreateSerializer
+
 class CreateReceptionistAPIView(APIView):
 
     permission_classes = [IsAuthenticated]

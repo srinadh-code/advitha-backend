@@ -1,13 +1,16 @@
 from django.db import models
 
+from cloudinary.models import CloudinaryField
 
 class EventCategory(models.Model):
 
     title = models.CharField(max_length=100)
 
-    image = models.ImageField(
-        upload_to="events/categories/"
-    )
+    image = CloudinaryField(
+    "image",
+    blank=True,
+    null=True
+)
 
     starting_price = models.PositiveIntegerField()
 
