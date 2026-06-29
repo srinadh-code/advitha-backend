@@ -1,22 +1,4 @@
-# from rest_framework import serializers
-# from .models import EventCategory, EventBooking
 
-
-# class EventCategorySerializer(
-#     serializers.ModelSerializer
-# ):
-#     class Meta:
-#         model = EventCategory
-#         fields = "__all__"
-
-
-# class EventBookingSerializer(
-#     serializers.ModelSerializer
-# ):
-#     class Meta:
-#         model = EventBooking
-#         fields = "__all__"
-        
 
 from rest_framework import serializers
 from .models import EventCategory, EventBooking
@@ -38,8 +20,9 @@ class EventCategorySerializer(serializers.ModelSerializer):
         ]
 
     def get_image_url(self, obj):
-        if obj.image:
-            return obj.image.url
+        image_field = getattr(obj, "image", None)
+        if image_field:
+            return getattr(image_field, "url", None)
         return None
 
 

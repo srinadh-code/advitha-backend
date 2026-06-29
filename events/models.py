@@ -6,11 +6,22 @@ class EventCategory(models.Model):
 
     title = models.CharField(max_length=100)
 
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ("pending", "Pending"),
+            ("confirmed", "Confirmed"),
+            ("cancelled", "Cancelled"),
+        ],
+        default="pending"
+    )
+
     image = CloudinaryField(
-    "image",
-    blank=True,
-    null=True
-)
+        blank=True,
+        max_length=255,
+        null=True,
+        verbose_name="image",
+    )
 
     starting_price = models.PositiveIntegerField()
 
@@ -29,7 +40,6 @@ class EventCategory(models.Model):
     
     
     
-from django.db import models
 
 
 class EventBooking(models.Model):

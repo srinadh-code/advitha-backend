@@ -58,7 +58,7 @@ class EventBookingAPIView(APIView):
         serializer = EventBookingSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save(status="confirmed")
+            serializer.save()
             return Response(serializer.data, status=201)
 
         return Response(serializer.errors, status=400)
