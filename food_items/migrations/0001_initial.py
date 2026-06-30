@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('image', cloudinary.models.CloudinaryField(blank=True, max_length=255, null=True, verbose_name='image')),
                 ('description', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='foods', to='food_iteams.foodcategory')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='foods', to='food_items.foodcategory')),
             ],
         ),
     ]

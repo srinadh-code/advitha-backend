@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'tourism',
-    'food_iteams',
+    'food_items',
     'corsheaders',
     "cloudinary",
     "cloudinary_storage",

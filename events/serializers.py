@@ -26,7 +26,25 @@ class EventCategorySerializer(serializers.ModelSerializer):
         return None
 
 
+# class EventBookingSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = EventBooking
+#         fields = "__all__"
+
 class EventBookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventBooking
-        fields = "__all__"
+        fields = [
+            "id",
+            "name",
+            "phone",
+            "event_date",
+            "guests",
+            "category",
+            "status",
+            "created_at",
+        ]
+
+        extra_kwargs = {
+            "status": {"read_only": True}
+        }

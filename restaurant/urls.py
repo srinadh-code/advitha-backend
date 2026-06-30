@@ -56,7 +56,7 @@ urlpatterns = [
     path('api/auth/', include("allauth.urls")),
     path('api/accounts/', include("accounts.urls")),
 
-    path('api/food/', include("food_iteams.urls")),
+    path('api/food/', include("food_items.urls")),
     path('api/tourism/', include("tourism.urls")),
     path('api/gallery/', include("gallery.urls")),
     path('api/rooms/', include("room_management.urls")),

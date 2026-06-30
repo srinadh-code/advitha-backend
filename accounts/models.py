@@ -37,6 +37,7 @@ class User(AbstractUser):
         null=True,
         blank=True
     )
+    # Intentionally nullable for users who register without Google.
     google_id = models.CharField(
     max_length=255,
     blank=True,

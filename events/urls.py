@@ -12,4 +12,8 @@ path(
     "bookings/",
     EventBookingAPIView.as_view()
 ),
+path(
+    "bookings/<int:booking_id>/",
+    EventBookingAPIView.as_view()
+)
 ]
