@@ -1,6 +1,5 @@
-
-    
 from django.db import models
+from django.db.models import Q, F
 from cloudinary.models import CloudinaryField
 class Room(models.Model):
 
@@ -31,15 +30,19 @@ class Room(models.Model):
 
     adults = models.IntegerField()
     children = models.IntegerField(default=0)
-
-    feature1 = models.CharField(max_length=100)
-    feature2 = models.CharField(max_length=100)
-    feature3 = models.CharField(max_length=100)
-    feature4 = models.CharField(max_length=100)
+    features = models.JSONField(default=list, blank=True)
 
     is_available = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition=Q(available_rooms__lte=F("total_rooms")),
+                name="available_lte_total",
+            )
+        ]
 
     def __str__(self):
         return self.title

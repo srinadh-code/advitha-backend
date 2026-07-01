@@ -24,7 +24,7 @@ Including another URLconf
     
 #     path('',include("accounts.urls")),
     
-#     path("api/",include("food_iteams.urls")),
+#     path("api/",include("food_items.urls")),
 #     path("api/tourism/",include("tourism.urls")),
 #     path("api/gallery/",include("gallery.urls")),
 #     path("rooms/", include("room_management.urls")),

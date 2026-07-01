@@ -2,7 +2,9 @@ asgiref==3.11.1
 certifi==2026.5.20
 cffi==2.0.0
 charset-normalizer==3.4.7
+click==8.4.2
 cloudinary==1.44.2
+colorama==0.4.6
 cryptography==48.0.0
 Django==6.0.5
 django-allauth==65.18.0
@@ -12,7 +14,10 @@ djangorestframework==3.17.1
 djangorestframework_simplejwt==5.5.1
 dotenv==0.9.9
 google-auth==2.53.0
+gunicorn==26.0.0
+h11==0.16.0
 idna==3.17
+packaging==26.2
 pillow==12.2.0
 pyasn1==0.6.3
 pyasn1_modules==0.4.2
@@ -27,3 +32,4 @@ six==1.17.0
 sqlparse==0.5.5
 tzdata==2026.2
 urllib3==2.7.0
+uvicorn==0.49.0

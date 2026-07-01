@@ -19,7 +19,7 @@ load_dotenv()
 
 
 import cloudinary
-from decouple import config
+
 
 cloudinary.config(
     cloud_name=config("CLOUD_NAME"),
@@ -43,12 +43,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-18zd)=v=$w2(!au7=+fq%n+l_3=kdr)d&l(t%wc%)x@8_sd8a%'
+# SECRET_KEY = 'django-insecure-18zd)=v=$w2(!au7=+fq%n+l_3=kdr)d&l(t%wc%)x@8_sd8a%'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = config("DEBUG", cast=bool, default=False)
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    cast=lambda v: [host.strip() for host in v.split(",")]
+)
 
 
 # Application definition
@@ -103,13 +109,19 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 # settings.py
-
-
-CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
+
+
+# CORS_ALLOW_ALL_ORIGINS = True
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://localhost:8080",
+#     "http://127.0.0.1:8080",
+# ]
 # python manage.py startapp accounts
 # python manage.py startapp rooms
 # python manage.py startapp bookings
