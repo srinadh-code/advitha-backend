@@ -41,12 +41,23 @@ class DashboardAPIView(APIView):
                 2
             )
         total_customers = User.objects.filter(role="customer").count()
+        today_checkins = Booking.objects.filter(
+        status="checked_in"
+        ).count()
 
+        today_checkouts = Booking.objects.filter(
+        status="checked_out"
+        ).count()
+
+        active_bookings = Booking.objects.filter(
+        status="booked"
+        ).count()
         bookings = Booking.objects.order_by("-created_at")[:5]
         total_staff = User.objects.filter(role="staff").count()
         total_receptionists = User.objects.filter(role="receptionist").count()
         total_event_bookings = EventBooking.objects.count()
         recent_event_bookings = EventBooking.objects.order_by("-created_at")[:5]
+        
         event_booking_data = [
             {
                 "name": booking.name,
@@ -80,4 +91,7 @@ class DashboardAPIView(APIView):
             "recent_event_bookings": event_booking_data,
             "occupancy_rate": occupancy_rate,
             "total_rooms": total_rooms,
+            "today_checkins": today_checkins,
+            "today_checkouts": today_checkouts,
+            "active_bookings": active_bookings,
         })
