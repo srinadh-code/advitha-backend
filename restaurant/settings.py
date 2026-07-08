@@ -117,27 +117,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-# CORS_ALLOW_ALL_ORIGINS = True
-# CSRF_TRUSTED_ORIGINS = [
-#     "http://localhost:8080",
-#     "http://127.0.0.1:8080",
-# ]
-# python manage.py startapp accounts
-# python manage.py startapp rooms
-# python manage.py startapp bookings
-# python manage.py startapp restaurant
-# python manage.py startapp gallery
-# python manage.py startapp tourism
-# python manage.py startapp contacts
-
-# accounts    → Login, Signup, Roles
-# rooms       → Room details, room types, amenities
-# bookings    → Room booking management
-# restaurant  → Menu, dishes, restaurant info
-# gallery     → Hotel and restaurant images
-# tourism     → Nearby attractions, places to visit
-# contacts    → Contact forms, enquiries
-
 
 ROOT_URLCONF = 'restaurant.urls'
 

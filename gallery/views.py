@@ -8,10 +8,11 @@ from rest_framework import status
 from .models import GalleryImage
 from .serializers import GalleryImageSerializer
 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 class GalleryListAPIView(APIView):
+    permission_classes = [AllowAny]
 
     def get(self, request):
 

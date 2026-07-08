@@ -8,9 +8,10 @@ from .serializers import (
 from .models import EventBooking
 from .serializers import EventBookingSerializer
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 class EventCategoryAPIView(APIView):
+    permission_classes = [AllowAny]
 
     def get(self, request):
 
@@ -30,7 +31,10 @@ class EventCategoryAPIView(APIView):
 
 class EventBookingAPIView(APIView):
     
-    permission_classes = [IsAuthenticated]
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+        return [IsAuthenticated()]
 
     def get(self, request):
         print("Logged in user:", request.user.id, request.user.email)

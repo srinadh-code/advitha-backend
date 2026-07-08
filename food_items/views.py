@@ -16,6 +16,7 @@ from rest_framework import status
 class FoodCategoryListView(generics.ListAPIView):
     queryset = FoodCategory.objects.all()
     serializer_class = FoodCategorySerializer
+    permission_classes = [AllowAny]
 
 
 class FoodListCreateView(generics.ListCreateAPIView):

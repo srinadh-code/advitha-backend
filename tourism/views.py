@@ -180,6 +180,8 @@ class TourismPlaceDetailAPIView(APIView):
 
 
 class HotelLocationView(APIView):
+    permission_classes = [AllowAny]
+    
     def get(self, request):
         location = HotelLocation.objects.first()
 
