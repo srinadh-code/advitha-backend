@@ -1,52 +1,5 @@
 
 
-
-# from django.urls import path
-# from .views import (
-#     BookingAPIView,
-#     CancelBookingAPIView,
-#     TodayCheckInAPIView,
-#     TodayCheckOutAPIView,
-#     CheckInAPIView,
-#     CheckOutAPIView,
-# )
-
-# urlpatterns = [
-#     path("", BookingAPIView.as_view(), name="bookings"),
-
-#     path(
-#         "cancel/<int:pk>/",
-#         CancelBookingAPIView.as_view(),
-#         name="cancel-booking"
-#     ),
-
-#     path(
-#         "check-in/",
-#         TodayCheckInAPIView.as_view(),
-#         name="today-checkin"
-#     ),
-
-#     path(
-#         "check-out/",
-#         TodayCheckOutAPIView.as_view(),
-#         name="today-checkout"
-#     ),
-
-#     path(
-#         "checkin/<int:pk>/",
-#         CheckInAPIView.as_view(),
-#         name="checkin"
-#     ),
-
-#     path(
-#         "checkout/<int:pk>/",
-#         CheckOutAPIView.as_view(),
-#         name="checkout"
-#     ),
-# ]
-
-
-
 from django.urls import path
 from .views import (
     BookingAPIView,
@@ -54,9 +7,10 @@ from .views import (
     TodayCheckInAPIView,
     TodayCheckOutAPIView,
     CheckInAPIView,
-    CheckOutAPIView,
-)
+    CheckOutAPIView,CustomerDetailAPIView,
 
+)
+from .views import CustomerListAPIView
 urlpatterns = [
     path("", BookingAPIView.as_view(), name="bookings"),
 
@@ -93,5 +47,15 @@ urlpatterns = [
     "my/",
     BookingAPIView.as_view(),
     name="my-bookings"
+),
+    path(
+    "customers/",
+    CustomerListAPIView.as_view(),
+    name="customers",
+),
+    path(
+    "customers/<int:pk>/",
+    CustomerDetailAPIView.as_view(),
+    name="customer-detail",
 ),
 ]

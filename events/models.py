@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 from cloudinary.models import CloudinaryField
 
 class EventCategory(models.Model):
@@ -43,6 +43,13 @@ class EventCategory(models.Model):
 
 
 class EventBooking(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="event_bookings",
+        null=True,
+        blank=True,
+    )
 
     category = models.ForeignKey(
         EventCategory,

@@ -14,33 +14,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.contrib import admin
-# from django.urls import path,include
-# from django.conf import settings
-# from django.conf.urls.static import static
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('accounts/',include("allauth.urls")),
-    
-#     path('',include("accounts.urls")),
-    
-#     path("api/",include("food_items.urls")),
-#     path("api/tourism/",include("tourism.urls")),
-#     path("api/gallery/",include("gallery.urls")),
-#     path("rooms/", include("room_management.urls")),
-#     path("bookings/",include("bookings.urls")),
-#     path("api/contact/", include("contact.urls")),
-#     path("api/events/",include("events.urls")),
-#     path("api/",include("display_dashboard.urls")),
-
-    
-
-    
-# ]
-# urlpatterns += static(
-#     settings.MEDIA_URL,
-#     document_root=settings.MEDIA_ROOT
-# )
 
 
 

@@ -29,9 +29,11 @@ class EventCategoryAPIView(APIView):
 
 
 class EventBookingAPIView(APIView):
+    
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        print("Logged in user:", request.user.id, request.user.email)
         if request.user.role not in ["admin", "receptionist"]:
             return Response(
                 {"error": "You are not authorized"},
@@ -63,7 +65,7 @@ class EventBookingAPIView(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-            serializer.save()
+            serializer.save(user=request.user)
             return Response(serializer.data, status=201)
 
         return Response(serializer.errors, status=400)

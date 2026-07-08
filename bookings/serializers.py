@@ -1,31 +1,3 @@
-# from rest_framework import serializers
-# from .models import  Booking
-
-
-
-# class BookingSerializer(serializers.ModelSerializer):
-
-#     room_name = serializers.CharField(
-#         source="room.title",
-#         read_only=True
-#     )
-
-#     class Meta:
-#         model = Booking
-#         fields = [
-#             "id",
-#             "full_name",
-#             "email",
-#             "phone",
-#             "room",
-#             "room_name",
-#             "check_in",
-#             "check_out",
-#             "guests",
-#             "status",
-#             "created_at",
-#         ]
-
 
 from datetime import date
 from rest_framework import serializers
@@ -77,3 +49,21 @@ class BookingSerializer(serializers.ModelSerializer):
             })
 
         return attrs
+    
+from rest_framework import serializers
+from .models import Booking
+
+
+class CustomerBookingSerializer(serializers.ModelSerializer):
+    room = serializers.CharField(source="room.title")
+
+    class Meta:
+        model = Booking
+        fields = [
+            "id",
+            "room",
+            "check_in",
+            "check_out",
+            "guests",
+            "status",
+        ]
